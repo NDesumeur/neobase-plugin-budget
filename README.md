@@ -1,11 +1,11 @@
 # Budget
 
-Suis tes comptes et tes livrets dans NeoBase : clique sur un montant pour ecrire le solde de ta banque, ajoute tes depenses, rentrees d'argent et virements, et prevois ton epargne mois par mois.
+Suis tes comptes et tes livrets, ajoute tes opérations et prévois ton épargne.
 
-Tes donnees sont rangees dans le dossier du plugin, que NeoBase sauvegarde (synchro cloud comprise).
+Ses données sont rangées dans le dossier du plugin, que NeoBase sauvegarde (synchro cloud comprise). Au premier lancement, il reprend ce que tu avais déjà dans NeoBase.
 
 ## Installer
 
-Dans NeoBase : **NeoStore -> A decouvrir -> Budget -> Installer**.
+Dans NeoBase : **NeoStore → À découvrir → Budget → Installer**.
 
-Developper un plugin : voir le [SDK NeoBase](https://github.com/NDesumeur/neobase-sdk).
+Développer un plugin : voir le [SDK NeoBase](https://github.com/NDesumeur/neobase-sdk).

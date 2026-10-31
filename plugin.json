@@ -1,9 +1,9 @@
 {
   "id": "neobase.budget",
   "name": "Budget",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "author": "NDesumeur",
-  "description": "Suis tes comptes et tes livrets, ajoute tes opérations et prévois ton épargne.",
+  "description": "Tes comptes, tes dépenses et un plan d'épargne : crée tes comptes avec plafond et intérêts (par an ou par mois) et vois ce que ça donne.",
   "icon": "icon.png",
   "entry": "index.js",
   "view": "budget",
