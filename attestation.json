@@ -1,9 +1,0 @@
-{
-  "pluginId": "neobase.budget",
-  "repo": "NDesumeur/neobase-plugin-budget",
-  "version": "1.0.1",
-  "sha256": "ce7b37c5c41007f6dd2aff93fc3d794316437e18b1d95a4a16f06308b9b39360",
-  "approvedAt": "2026-10-31T14:23:23.160Z",
-  "neobase": ">=4.0.0",
-  "signature": "gzGZJCy0W24XwK5toZuRiCz87CwbQ3dZA6wopf9SzvRixWDfMfFySfumguvM3/n0T+pWO2Zy8yXysmSoahXmDg=="
-}
