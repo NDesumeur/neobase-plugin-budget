@@ -6,6 +6,7 @@ export default async function (ctx) {
   const view = ctx.view;
   if (!ctx.host) { view.textContent = "Ce plugin doit être approuvé par NeoBase pour s'ouvrir."; return; }
   const { el, toast, sfx, ask, newTab, pixIcon, PIX, WX } = ctx.host;
+  const nbConfirm = ctx.host.confirm;  // la boîte de confirmation de NeoBase, à la place de celle de Windows
   const folder = ctx.folder, legacy = ctx.legacy || {};
   view.innerHTML = HTML;
   const $ = id => id === "budgetApp" ? view : view.querySelector('#' + id);  // les identifiants de ta vue, sans toucher à ceux du reste de NeoBase
@@ -93,9 +94,9 @@ export default async function (ctx) {
       const r = el('div', 'txRow'), n = el('div', 'tn'), del = el('button', 'x', 'X');
       n.append(o.label || (o.amount < 0 ? 'Dépense' : 'Rentrée'), el('small', '', accOf(o.acc)?.name || ''));
       del.title = 'Supprimer (le solde est remis comme avant)';
-      del.onclick = () => {
+      del.onclick = async () => {
         const all = budget.ops.filter(x => o.group ? x.group === o.group : x === o);
-        if (!confirm('Supprimer « ' + (o.label || 'cette opération') + ' » ? ' + (all.length > 1 ? 'Les deux côtés du virement sont annulés.' : 'Le solde du compte est remis comme avant.'))) return;
+        if (!await nbConfirm('Supprimer « ' + (o.label || 'cette opération') + ' » ? ' + (all.length > 1 ? 'Les deux côtés du virement sont annulés.' : 'Le solde du compte est remis comme avant.'))) return;
         for (const x of all) { const a = accOf(x.acc); if (a) a.balance = r2(a.balance - x.amount); }
         budget.ops = budget.ops.filter(x => !all.includes(x)); saveBudget(); renderBudget();
       };
