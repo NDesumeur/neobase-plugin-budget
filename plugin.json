@@ -1,0 +1,19 @@
+{
+  "id": "neobase.budget",
+  "name": "Budget",
+  "version": "1.0.0",
+  "author": "NDesumeur",
+  "description": "Suis tes comptes et tes livrets, ajoute tes opérations et prévois ton épargne.",
+  "icon": "icon.png",
+  "entry": "index.js",
+  "view": "budget",
+  "neobase": ">=4.0.0",
+  "type": "app",
+  "category": "Finance",
+  "mobile": true,
+  "system": false,
+  "dependencies": {},
+  "permissions": [
+    "full"
+  ]
+}
