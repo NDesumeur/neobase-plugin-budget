@@ -1,6 +1,6 @@
 // Budget : ton appli d'origine (HTML et code inchangés), livrée en plugin.
-// Ses données sont dans le dossier du plugin, que NeoBase sauvegarde (synchro cloud et sauvegardes) ; à la première ouverture elle reprend ce que tu avais dans NeoBase.
-// Elle tourne dans le bac à sable de NeoBase, avec ses outils d'interface (ctx.host) et seulement les autorisations de son plugin.json.
+// Ses données sont dans le dossier du plugin, que NeoDex sauvegarde (synchro cloud et sauvegardes) ; à la première ouverture elle reprend ce que tu avais dans NeoDex.
+// Elle tourne dans le bac à sable de NeoDex, avec ses outils d'interface (ctx.host) et seulement les autorisations de son plugin.json.
 const HTML = "<div class=\"appWrap\">\n      <div class=\"agHead\"><span class=\"label\">Budget</span><span class=\"hint\">clic sur un montant : écrire le solde de ta banque</span><div class=\"agNav\"><button class=\"btn main px\" id=\"bdNewAcc\">+ NOUVEAU COMPTE</button></div></div>\n      <div class=\"sysGrid\" id=\"bdTiles\"></div>\n      <div class=\"sysCard px\" id=\"bdAccBox\" style=\"display:none\"><span class=\"label\" id=\"bdAccTitle\">Nouveau compte</span>\n        <div class=\"bdForm\">\n          <input class=\"f\" id=\"bdAccName\" placeholder=\"Nom (ex : Livret Jeune, PEL…)\" spellcheck=\"false\">\n          <select class=\"f\" id=\"bdAccType\"><option value=\"epargne\">Épargne (livret, PEL…)</option><option value=\"courant\">Compte courant</option></select>\n          <input class=\"f\" id=\"bdAccBal\" placeholder=\"Solde €\" inputmode=\"decimal\">\n          <input class=\"f\" id=\"bdAccCap\" placeholder=\"Plafond € (facultatif)\" inputmode=\"decimal\">\n          <input class=\"f\" id=\"bdAccRate\" placeholder=\"Intérêts %\" inputmode=\"decimal\">\n          <select class=\"f\" id=\"bdAccPer\"><option value=\"an\">par an</option><option value=\"mois\">par mois</option></select>\n          <button class=\"btn main px\" id=\"bdAccSave\">Enregistrer</button><button class=\"btn px\" id=\"bdAccCancel\">Annuler</button><button class=\"btn px\" id=\"bdAccDel\">Supprimer le compte</button>\n        </div>\n        <div class=\"hint\">Les intérêts sont ajoutés chaque mois dans la prévision (un taux annuel est converti en taux mensuel équivalent). Tu peux les changer quand tu veux.</div>\n      </div>\n      <div class=\"sysCard px\"><span class=\"label\">Ajouter une opération</span>\n        <div class=\"bdForm\">\n          <select class=\"f\" id=\"bdKind\"><option value=\"depense\">Dépense</option><option value=\"rentree\">Rentrée d'argent</option><option value=\"virement\">Virement</option></select>\n          <select class=\"f\" id=\"bdAcc\" title=\"Compte\"></select>\n          <select class=\"f\" id=\"bdTo\" title=\"Compte qui reçoit\"></select>\n          <input class=\"f\" id=\"bdLabel\" placeholder=\"Libellé (facultatif : courses, salaire…)\" spellcheck=\"false\">\n          <input class=\"f\" id=\"bdAmount\" placeholder=\"Montant €\" inputmode=\"decimal\">\n          <button class=\"btn main px\" id=\"bdAdd\">Ajouter</button>\n        </div>\n      </div>\n      <div class=\"stCols\">\n        <div class=\"sysCard px\"><span class=\"label\">Dernières opérations</span><div id=\"bdTx\"></div></div>\n        <div class=\"sysCard px\"><span class=\"label\">Prévoir mon épargne</span>\n          <div class=\"bdPlan\">Je mets de côté <input class=\"f\" id=\"bdPlanMonthly\" inputmode=\"decimal\" placeholder=\"150\"> € par mois sur le <select class=\"f\" id=\"bdPlanTo\"></select></div>\n          <div class=\"bdPlan\">Objectif (facultatif) <input class=\"f\" id=\"bdPlanTarget\" inputmode=\"decimal\" placeholder=\"ex : 3000\"> €</div>\n          <div id=\"bdPlanOut\"></div>\n          <span class=\"label\" style=\"margin-top:6px\">Livrets · 12 prochains mois</span>\n          <div id=\"bdChart\" class=\"colChart\"></div>\n        </div>\n      </div>\n    </div>";
 /*CSS-MOVED*/ const CSS = `.bdForm{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 #bdKind{width:170px}
@@ -24,16 +24,16 @@ const HTML = "<div class=\"appWrap\">\n      <div class=\"agHead\"><span class=\
 .advice{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-size:15px;line-height:1.45;color:var(--lilac)}
 .advice+.advice{border-top:1px solid rgba(255,255,255,.06)}
 .advice .badge{flex:none;min-width:84px;text-align:center}
-`;  // le style de ce plugin (il utilise les variables du thème de NeoBase)
+`;  // le style de ce plugin (il utilise les variables du thème de NeoDex)
 export default async function (ctx) {
   const view = ctx.view;
-  if (!ctx.host) { view.textContent = "Ce plugin doit être approuvé par NeoBase pour s'ouvrir."; return; }
+  if (!ctx.host) { view.textContent = "Ce plugin doit être approuvé par NeoDex pour s'ouvrir."; return; }
   const { el, toast, sfx, ask, newTab, pixIcon, PIX, WX } = ctx.host;
-  const nbConfirm = ctx.host.confirm;  // la boîte de confirmation de NeoBase, à la place de celle de Windows
+  const nbConfirm = ctx.host.confirm;  // la boîte de confirmation de NeoDex, à la place de celle de Windows
   const folder = ctx.folder, legacy = ctx.legacy || {};
   ctx.host.addStyle(CSS);
   view.innerHTML = HTML;
-  const $ = id => id === "budgetApp" ? view : view.querySelector('#' + id);  // les identifiants de ta vue, sans toucher à ceux du reste de NeoBase
+  const $ = id => id === "budgetApp" ? view : view.querySelector('#' + id);  // les identifiants de ta vue, sans toucher à ceux du reste de NeoDex
   const doc = async n => { try { return await folder.read(n); } catch { return null; } };
   const ymd = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   const addDays = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);

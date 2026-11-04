@@ -1,6 +1,6 @@
 {
-  "pluginId": "neobase.budget",
-  "repo": "NDesumeur/neobase-plugin-budget",
+  "pluginId": "neodex.budget",
+  "repo": "NDesumeur/neodex-plugin-budget",
   "version": "1.1.0",
   "sha256": "18c24655abdb91e3554fe7bd9f1e4c66d7c5b2b1e84ed0526bb919bfac2bd8bd",
   "approvedAt": "2026-10-31T22:44:06.000Z",
