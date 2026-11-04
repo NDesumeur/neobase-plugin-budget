@@ -1,7 +1,7 @@
 {
   "id": "neobase.budget",
   "name": "Budget",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "NDesumeur",
   "description": "Tes comptes, tes dépenses et un plan d'épargne : crée tes comptes avec plafond et intérêts (par an ou par mois) et vois ce que ça donne.",
   "icon": "icon.png",
@@ -13,7 +13,8 @@
   "mobile": true,
   "system": false,
   "dependencies": {},
+  "sdk": "2.1.0",
   "permissions": [
-    "full"
+    "storage"
   ]
 }
