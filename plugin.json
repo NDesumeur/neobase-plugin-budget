@@ -10,6 +10,8 @@
   "neobase": ">=4.0.0",
   "type": "app",
   "category": "Finance",
+  "syncMode": "fusion",
+  "syncInfo": "Comptes, dépenses, catégories.",
   "mobile": true,
   "system": false,
   "dependencies": {},
